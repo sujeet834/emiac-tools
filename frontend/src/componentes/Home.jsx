@@ -8,7 +8,6 @@ import { Dropdown, DropdownButton, Image } from 'react-bootstrap';
 import Semrush from './Semrush';
 import MozData from './MozData';
 import WordCount from './WordCount';
-import DailyReports from './DailyReports';
 import FileConverter from './FileConverter';
 
 function Home() {
@@ -33,8 +32,6 @@ function Home() {
                 return <MozData/>;
             case 'word_count':
                 return <WordCount/>;
-            case 'dailyReports':
-                return <DailyReports/>;
             case 'fileConverter':
                 return <FileConverter/>
             default:
@@ -51,7 +48,6 @@ function Home() {
                         <Nav.Link onClick={() => setActiveTab('semrush')} href="#" className="text-white">Semrush</Nav.Link>
                         <Nav.Link onClick={() => setActiveTab('moz')} href="#" className="text-white">Moz Data</Nav.Link>
                         <Nav.Link onClick={() => setActiveTab('word_count')} href="#" className="text-white">Word Count</Nav.Link>
-                        <Nav.Link onClick={() => setActiveTab('dailyReports')} href="#" className="text-white">Daily Reports</Nav.Link>
                         <Nav.Link onClick={() => setActiveTab('fileConverter')} href="#" className="text-white">File Converter</Nav.Link>
                     </Nav>
                     <DropdownButton
