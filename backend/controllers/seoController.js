@@ -7,7 +7,8 @@ export const getSemrushData = async (req, res) => {
         const userId = req.session.userId;
         if (!userId) return res.status(401).json({ success: false, message: 'User not authenticated' });
         const { urls } = req.body;
-
+        console.log(urls);
+        
         // Validate the URLs
         if (!urls || urls.length === 0) {
             return res.status(400).json({ success: false, message: 'No URLs provided' });
