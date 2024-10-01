@@ -1,15 +1,15 @@
 import express from 'express';
-import { getSemrushData, mozData } from '../controllers/seoController.js';
-// import multer from 'multer';
+import { getSemrushData, mozData ,linkedin_scraper } from '../controllers/seoController.js';
+
 
 
 const router = express.Router();
 
-// const upload = multer({ dest: 'src/uploads/' });
+
 
 router.post('/semrush' , getSemrushData);
 router.post('/mozdata' , mozData)
-// router.post('/convert' ,upload.single('file') , fileConvert)
+router.post('/linkedin-scrape' , linkedin_scraper)
 
 
 

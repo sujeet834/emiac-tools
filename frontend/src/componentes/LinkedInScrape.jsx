@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, Button, Table, Pagination, Image } from 'react-bootstrap';
 
@@ -9,43 +9,46 @@ function LinkedInScrape() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
-    
+    const [error, setError] = useState('');
+
     const employeesPerPage = 10;
 
-    // Dummy data for testing purposes
-    const dummyData = [
-        {
-            image: 'https://via.placeholder.com/50',
-            name: 'John Doe',
-            designation: 'Software Engineer',
-            email: 'johndoe@example.com',
-            linkedinUrl: 'https://linkedin.com/in/johndoe',
-        },
-        {
-            image: 'https://via.placeholder.com/50',
-            name: 'Jane Smith',
-            designation: 'Marketing Manager',
-            email: 'janesmith@example.com',
-            linkedinUrl: 'https://linkedin.com/in/janesmith',
-        },
-        // ... more dummy employees
-    ];
-
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form reload
+
+        if (!cookie || !companyName) {
+            setError('Please enter both LinkedIn Cookie and Company Name.');
+            return;
+        }
+
         setLoading(true);
+        setError(''); // Clear previous errors
+
         try {
-            // Make the API call to the backend to get LinkedIn employee data
-            const response = await axios.post('/api/linkedin-scrape', {
-                cookie,
-                companyName,
-            });
-            
-            // Set employee data and pagination
-            setEmployeeData(response.data.employees);
-            setTotalPages(Math.ceil(response.data.employees.length / employeesPerPage));
+            const response = await axios.post(
+                'http://localhost:5000/api/seo/linkedin-scrape',
+                { cookie, companyName }, { withCredentials: true }, // Send data in POST request
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            if (response.status === 200 && response.data) {
+                const employees = response.data.data[0].data;
+                console.log(employees);
+                
+
+                // Set employee data and total pages for pagination
+                setEmployeeData(employees);
+                setTotalPages(Math.ceil(employees.length / employeesPerPage));
+            } else {
+                setError('No data found or invalid response from the server.');
+            }
         } catch (error) {
             console.error('Error fetching employee data:', error);
+            setError('Error fetching employee data. Please check your inputs and try again.');
         } finally {
             setLoading(false);
         }
@@ -91,6 +94,12 @@ function LinkedInScrape() {
                             {loading ? 'Fetching Data...' : 'Submit'}
                         </Button>
                     </Form>
+
+                    {error && (
+                        <div className="mt-3 text-danger">
+                            {error}
+                        </div>
+                    )}
                 </Col>
             </Row>
 
@@ -111,15 +120,34 @@ function LinkedInScrape() {
                             <tbody>
                                 {paginatedEmployees.map((employee, index) => (
                                     <tr key={index}>
-                                        <td><Image src={employee.image} roundedCircle width={50} height={50} /></td>
-                                        <td>{employee.name}</td>
-                                        <td>{employee.designation}</td>
-                                        <td>{employee.email}</td>
-                                        <td><a href={employee.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></td>
+                                        <td>
+                                            {employee.image ? (
+                                                <Image src={employee.image} roundedCircle width={50} height={50} />
+                                            ) : (
+                                                'N/A'
+                                            )}
+                                        </td>
+                                        <td>{employee.name || 'N/A'}</td>
+                                        <td>{employee.designation || 'N/A'}</td>
+                                        <td>{employee.email || 'N/A'}</td>
+                                        <td>
+                                            {employee.linkedinUrl ? (
+                                                <a
+                                                    href={employee.linkedinUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    LinkedIn Profile
+                                                </a>
+                                            ) : (
+                                                'N/A'
+                                            )}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </Table>
+
                         {/* Pagination */}
                         <Pagination className="justify-content-center">
                             {Array.from({ length: totalPages }).map((_, index) => (
