@@ -4,6 +4,7 @@ import axios from 'axios'
 export const getSemrushData = async (req, res) => {
     try {
         // Retrieve the user ID from the session
+        
         const userId = req.session.userId;
         if (!userId) return res.status(401).json({ success: false, message: 'User not authenticated' });
         const { urls } = req.body;

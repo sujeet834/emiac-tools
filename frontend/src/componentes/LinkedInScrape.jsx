@@ -10,6 +10,7 @@ function LinkedInScrape() {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    
 
     const employeesPerPage = 10;
 

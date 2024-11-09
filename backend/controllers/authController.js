@@ -22,7 +22,7 @@ export const login = async (req, res)=>{
         }
         req.session.userId = user._id;
         req.session.role = user.role;
-        res.status(200).json({success:true , data:user});
+          res.status(200).json({success:true , data:user});
     } catch (error) {
         res.status(400).json({success:false , error:error.message});
     }

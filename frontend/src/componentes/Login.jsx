@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaGoogle , FaGithub } from "react-icons/fa";
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -24,43 +23,6 @@ function Login() {
     };
 
     return (
-    //     <div className="login template d-flex justify-content-center align-items-center w-100 vh-100 bg-primary">
-    //         <div className='p-5 form-container bg-white'>
-    //     <form onSubmit={handleSubmit}>
-    //         <h1 className="mb-4 text-center">Sign In</h1>
-    //         <div className='mb-2'>
-    //             <label className="form-label">Email</label>
-    //             <input
-    //                 type="email"
-    //                 className="form-control"
-    //                 placeholder="Enter your email"
-    //                 value={email}
-    //                 onChange={(e) => setEmail(e.target.value)}
-    //             />
-    //         </div>
-    //         <div className='mb-2'>
-    //             <label className="form-label">Password</label>
-    //             <input
-    //                 type="password"
-    //                 className="form-control"
-    //                 placeholder="Enter your password"
-    //                 value={password}
-    //                 onChange={(e) => setPassword(e.target.value)}
-    //             />
-    //         </div>
-    //         <div className='mb-2'>
-    //             <input type="checkbox" className='custom-control custom-checkbox' id='check' />
-    //             <label className="custom-input-label ms-2" htmlFor="check">Remember me</label>
-    //         </div>
-    //         <div className="d-grid">
-    //         <button className="btn btn-primary" type="submit">Sign in</button>
-    //         </div>
-    //         <p>
-    //             Forgot <a href="">Password ? <a href="/signup">Sign Up</a></a>
-    //         </p>
-    //     </form> 
-    //     </div>
-    // </div>
     <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f8f9fa' }}>
     <div className="card p-4 rounded-4" style={{ width: '450px', height:'500px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <h4 className="m-3 text-center fs-1 fw-bold">Sign in</h4>

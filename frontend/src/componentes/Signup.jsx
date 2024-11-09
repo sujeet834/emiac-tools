@@ -17,31 +17,13 @@ const Signup = () => {
             const res = await axios.post('http://localhost:5000/api/auth/signup' , {username , email , password} , {withCredentials : true});
             navigate("/login");
         } catch (error) {
-            console.log(error.response.data.message)
+            console.log(error.response.data.message);
         }
     }
 
 
 
   return (
-    // <div className='container mt-5'>
-    //     <h1 className='mt-4'>Signup</h1>
-    //     <form onSubmit={handleSubmit}>
-    //         <div className="mb-3">
-    //             <label htmlFor="" className='form-label'>Username</label>
-    //             <input type="text" className='form-control' placeholder='Enter Your Username' value={username} onChange={(e)=>setUsername(e.target.value)}/>
-    //         </div>
-    //         <div className="mb-3">
-    //             <label htmlFor="" className='form-label'>Email</label>
-    //             <input type="email" className='form-control' placeholder='Enter Your Email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
-    //         </div>
-    //         <div className="mb-3">
-    //             <label htmlFor="" className='form-label'>Password</label>
-    //             <input type="password" className='form-control' placeholder='Enter Your Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-    //         </div>
-    //         <button className='btn btn-primary' type='submit'> Signup</button>
-    //     </form>
-    // </div>
     <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#f8f9fa' }}>
     <div className="card p-4 rounded-4" style={{ width: '450px', height:'600px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <h4 className="m-3 text-center fs-1 fw-bold">Sign up</h4>

@@ -142,7 +142,7 @@ function Home() {
                     <hr className="my-4" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
                     <Row>
                         <Col className="text-center">
-                            <p className="mb-0">&copy; 2024 SEO Analyzer. All rights reserved.</p>
+                            <p className="mb-`10">&copy; 2024 SEO Analyzer. All rights reserved.</p>
                         </Col>
                     </Row>
                 </Container>
